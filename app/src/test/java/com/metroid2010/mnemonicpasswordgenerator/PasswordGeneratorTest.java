@@ -2,14 +2,18 @@ package com.metroid2010.mnemonicpasswordgenerator;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.util.Arrays;
+import java.util.Vector;
+import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
-public class WordDictionaryTest {
+public class PasswordGeneratorTest {
 
     private WordDictionary wd;
 
@@ -28,14 +32,10 @@ public class WordDictionaryTest {
     }
 
     @Test
-    public void wordDictionary_whenRequestWordAtPosition_ReturnCorrectWord() {
-        assertEquals(this.wd.fetch_word(199), "test200");
-        assertEquals(this.wd.fetch_word(0), "test1");
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordDictionary_whenRequestWordAtPositionOutOfBounds_RaiseException() {
-        this.wd.fetch_word(1000);
+    public void passwordGenerator_whenGeneratePasswordOfFourWords_returnStringFourRandomWords() {
+        PasswordGenerator pwg = new PasswordGenerator(this.wd);
+        String pwd_regex = "([a-zA-Z\\'0-9]+[\\s]){3}(([a-zA-Z\\'0-9]+))";
+        assertTrue(pwg.generate_password().toString().matches(pwd_regex));
     }
 
 }
