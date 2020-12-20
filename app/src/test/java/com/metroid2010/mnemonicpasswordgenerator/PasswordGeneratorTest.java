@@ -38,4 +38,9 @@ public class PasswordGeneratorTest {
         assertTrue(pwg.generate_password().toString().matches(pwd_regex));
     }
 
+    @Test
+    public void passwordGenerator_whenGenerateMultiplePasswords_returnDifferentResults_checkEntropy() {
+        PasswordGenerator pwg = new PasswordGenerator(this.wd);
+    }
+
 }

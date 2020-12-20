@@ -38,4 +38,9 @@ public class WordDictionaryTest {
         this.wd.fetch_word(1000);
     }
 
+    @Test
+    public void wordDictionary_whenGetDictionaryLength_returnCorrectLength() {
+        assertEquals(this.wd.get_length(), 200);
+    }
+
 }

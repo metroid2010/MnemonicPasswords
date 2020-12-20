@@ -19,15 +19,16 @@ public class PasswordGenerator {
                 this.word_dictionary));
     }
 
-    private int generate_random_number() {
+    private int generate_random_number(int max) {
         SecureRandom rng = new SecureRandom();
-        return rng.nextInt();
+        return rng.nextInt(max);
     }
 
     private Vector<String> build_random_word_vector(int length, WordDictionary wd) {
         Vector<String> word_vector = new Vector<>();
         for (int i=0; i<length; i++) {
-            word_vector.add(wd.fetch_word(this.generate_random_number()));
+            word_vector.add(wd.fetch_word(
+                    this.generate_random_number(this.word_dictionary.get_length())));
         }
         return word_vector;
     }

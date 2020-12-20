@@ -33,4 +33,6 @@ public class WordDictionary {
         return this.dictionary_contents.get(index);
     }
 
+    public int get_length() { return this.dictionary_contents.size(); }
+
 }
