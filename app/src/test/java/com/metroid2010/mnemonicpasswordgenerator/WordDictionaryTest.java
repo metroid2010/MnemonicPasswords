@@ -13,17 +13,10 @@ public class WordDictionaryTest {
 
     private WordDictionary wd;
 
-    private InputStream getResourceDictionary() throws IOException {
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream("test_dictionary");
-        if (is == null) {
-            System.exit(1);
-        }
-        return is;
-    }
 
     @Before
     public void setUp() throws IOException {
-        InputStream test_dictionary = this.getResourceDictionary();
+        InputStream test_dictionary = new DictionaryLoaderFixture("test_dictionary").getStream();
         this.wd = new WordDictionary(test_dictionary, "test");
     }
 
