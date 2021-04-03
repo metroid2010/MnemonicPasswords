@@ -9,12 +9,16 @@ import java.util.Vector;
 public class WordDictionary {
 
     private Vector<String> dictionary_contents;
+    private String dictionary_name;
 
-    public WordDictionary(InputStream dictionary_file, String language) throws IOException{
-        this.dictionary_contents = this.load(dictionary_file);
+    public WordDictionary(InputStream dictionary_file, String dictionary_name) throws IOException{
+        this.dictionary_contents = this.load_from_is(dictionary_file);
+        this.dictionary_name = dictionary_name;
     }
 
-    private Vector<String> load(InputStream is) throws IOException {
+    public String get_dictionary_name() { return this.dictionary_name; }
+
+    private Vector<String> load_from_is(InputStream is) throws IOException {
         Vector<String> contents = new Vector<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line;

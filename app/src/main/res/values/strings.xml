@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MnemonicPasswordGenerator</string>
+    <string name="button_generate_password">Generate Password</string>
+    <string name="textview_password_box_placeholder">Press Generate Password</string>
 </resources>

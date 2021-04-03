@@ -20,9 +20,8 @@ public class PasswordGeneratorTest {
     }
 
     @Test
-    public void passwordGenerator_whenGeneratePasswordOfFourWords_returnStringFourRandomWords() {
-        PasswordGenerator pwg = new PasswordGenerator();
-        pwg.set_dictionary(this.wd);
+    public void PasswordGenerator_WhenGeneratePasswordOfFourWords_ReturnStringFourRandomWords() {
+        PasswordGenerator pwg = new PasswordGenerator(this.wd, 4);
         String pwd_regex = "([a-zA-Z\\'0-9]+[\\s]){3}(([a-zA-Z\\'0-9]+))";
         assertTrue(pwg.generate_password().toString().matches(pwd_regex));
     }

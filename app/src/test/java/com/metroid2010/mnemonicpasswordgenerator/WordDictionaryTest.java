@@ -21,18 +21,18 @@ public class WordDictionaryTest {
     }
 
     @Test
-    public void wordDictionary_whenRequestWordAtPosition_ReturnCorrectWord() {
+    public void WordDictionary_WhenRequestWordAtPosition_ReturnCorrectWord() {
         assertEquals(this.wd.fetch_word(199), "test200");
         assertEquals(this.wd.fetch_word(0), "test1");
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void wordDictionary_whenRequestWordAtPositionOutOfBounds_RaiseException() {
+    public void WordDictionary_WhenRequestWordAtPositionOutOfBounds_RaiseException() {
         this.wd.fetch_word(1000);
     }
 
     @Test
-    public void wordDictionary_whenGetDictionaryLength_returnCorrectLength() {
+    public void WordDictionary_WhenGetDictionaryLength_ReturnCorrectLength() {
         assertEquals(this.wd.get_length(), 200);
     }
 

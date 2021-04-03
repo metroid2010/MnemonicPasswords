@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class PasswordTest {
 
     @Test
-    public void password_whenCreatePassWithWhitespace_returnTrimmedPass() {
+    public void Password_WhenCreatePassWithWhitespace_ReturnTrimmedPass() {
         Vector<String> al = new Vector<>(Arrays.asList("test1", "test2 ", "  test3 "));
         Password pwd = new Password(al);
         assertEquals(pwd.toString(), "test1 test2 test3");

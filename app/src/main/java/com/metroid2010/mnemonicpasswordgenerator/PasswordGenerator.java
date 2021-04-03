@@ -8,8 +8,9 @@ public class PasswordGenerator {
     private int password_length;
     private WordDictionary word_dictionary;
 
-    public PasswordGenerator() {
-        this.password_length = 4;
+    public PasswordGenerator(WordDictionary word_dictionary, int password_length) {
+        this.password_length = password_length;
+        this.word_dictionary = word_dictionary;
     }
 
     public Password generate_password(){
@@ -18,8 +19,8 @@ public class PasswordGenerator {
                 this.word_dictionary));
     }
 
-    public void set_dictionary(WordDictionary wd) {
-        this.word_dictionary = wd;
+    public String get_dictionary_name() {
+        return this.word_dictionary.get_dictionary_name();
     }
 
     private int generate_random_number(int max) {
