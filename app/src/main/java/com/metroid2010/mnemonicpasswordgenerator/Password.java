@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Password {
 
-    private Vector<String> content;
+    private final Vector<String> content;
 
     public Password(Vector<String> content) {
         this.content = content;
