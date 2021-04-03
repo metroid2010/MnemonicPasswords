@@ -21,7 +21,6 @@ public class PasswordGenerator {
     public void set_dictionary(WordDictionary wd) {
         this.word_dictionary = wd;
     }
-    public boolean has_dictionary() { return this.word_dictionary != null; }
 
     private int generate_random_number(int max) {
         SecureRandom rng = new SecureRandom();
