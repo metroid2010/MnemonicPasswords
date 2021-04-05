@@ -7,4 +7,6 @@
     <string name="textview_error_generating_password">Error generating password</string>
     <string name="toast_error_generate_password_dict_not_initialized">Cannot generate password: dictionary not initialized</string>
     <string name="button_copy_to_clipboard">Copy to clipboard</string>
+    <string name="toast_clipboard_copy_success">Password copied to clipboard</string>
+    <string name="toast_error_copy_to_clipboard_empty_password">No password to copy to clipboard</string>
 </resources>

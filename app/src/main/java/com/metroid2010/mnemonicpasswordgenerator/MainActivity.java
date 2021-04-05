@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private ClipboardManager clipboard;
 
     public MainActivity() {
-        this.clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
     @Override
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             showToast(getString(R.string.toast_error_opening_dictionary) + dictionaries_assets_path + "/" + dictionaries[0]);
         }
         this.textview_password = (TextView) findViewById(R.id.textview_password_box);
+        this.clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
     public void ocButtonGeneratePassword(View view) {
@@ -63,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
     public void ocButtonCopyToClipboard(View view) {
         try {
             ClipData clip = ClipData.newPlainText("MnemonicPasswordGenerator password", this.password.toString());
+            showToast(getString(R.string.toast_clipboard_copy_success));
             this.clipboard.setPrimaryClip(clip);
         } catch (NullPointerException e) {
-            showToast("No password to copy to clipboard");
+            showToast(getString(R.string.toast_error_copy_to_clipboard_empty_password));
         }
     }
 
