@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textview_password_box_placeholder"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,9 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_generate_password"
-        android:onClick="oc_button_generate_password"
+        android:onClick="ocButtonGeneratePassword"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="ocButtonCopyToClipboard"
+        android:text="@string/button_copy_to_clipboard"
+        app:layout_constraintBottom_toTopOf="@+id/button_generate_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
