@@ -8,8 +8,8 @@ import java.util.Vector;
 
 public class WordDictionary {
 
-    private Vector<String> dictionary_contents;
-    private String dictionary_name;
+    private final Vector<String> dictionary_contents;
+    private final String dictionary_name;
 
     public WordDictionary(InputStream dictionary_file, String dictionary_name) throws IOException{
         this.dictionary_contents = this.load_from_is(dictionary_file);
@@ -24,7 +24,7 @@ public class WordDictionary {
         String line;
         while ((line = br.readLine()) != null){
             contents.add(line);
-        };
+        }
         br.close();
         return contents;
     }

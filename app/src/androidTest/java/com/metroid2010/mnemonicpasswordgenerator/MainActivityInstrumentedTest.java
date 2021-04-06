@@ -58,13 +58,10 @@ public class MainActivityInstrumentedTest {
 
     @Test
     public void copyToClipboardWithEmptyPasswordTest() {
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                final Context context = getApplicationContext();
-                final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
-            }
+        getInstrumentation().runOnMainSync(() -> {
+            final Context context = getApplicationContext();
+            final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
         });
         onView(withId(R.id.button_copy_to_clipboard)).perform(click());
         final String[] clipboardContent = new String[1];
@@ -108,13 +105,10 @@ public class MainActivityInstrumentedTest {
     }
 
     private void getClipboardContent(String[] clipboardContent) {
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                final Context context = getApplicationContext();
-                final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboardContent[0] = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
-            }
+        getInstrumentation().runOnMainSync(() -> {
+            final Context context = getApplicationContext();
+            final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboardContent[0] = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
         });
     }
 }

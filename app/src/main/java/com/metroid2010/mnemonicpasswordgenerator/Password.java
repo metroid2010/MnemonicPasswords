@@ -1,6 +1,5 @@
 package com.metroid2010.mnemonicpasswordgenerator;
 
-import java.util.Iterator;
 import java.util.Vector;
 
 public class Password {
@@ -13,9 +12,8 @@ public class Password {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Iterator it = this.content.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next().toString().trim() + " ");
+        for (String word : content) {
+            sb.append(word.trim()).append(" ");
         }
         return sb.toString().trim();
     }

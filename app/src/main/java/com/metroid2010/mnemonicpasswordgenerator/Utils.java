@@ -12,12 +12,9 @@ public class Utils {
 
     public static void showToastAndLog(Context mContext, String text) {
         Handler mHandler = new Handler(Looper.getMainLooper());
-        Runnable makeToast = new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(mContext.getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, text);
-            }
+        Runnable makeToast = () -> {
+            Toast.makeText(mContext.getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, text);
         };
         mHandler.post(makeToast);
     }

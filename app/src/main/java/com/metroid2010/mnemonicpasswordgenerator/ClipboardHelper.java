@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,8 +12,8 @@ import static com.metroid2010.mnemonicpasswordgenerator.Utils.showToastAndLog;
 
 public class ClipboardHelper {
 
-    private Timer mTimer;
-    private Context mContext;
+    private final Timer mTimer;
+    private final Context mContext;
     private final String clipboard_label = "MnemonicPasswordGenerator password";
     private final long DEFAULT_TIMEOUT = (BuildConfig.DEBUG ? (5 * 1000) : (30 * 1000));
 
@@ -24,9 +23,9 @@ public class ClipboardHelper {
         mTimer = new Timer();
     }
 
-    public void copyToClipboardWithTimeout(String text, String toast_text) {
+    public void copyToClipboardWithTimeout(String text, String toast_text_success, String toast_text_error) {
         copyToClipboard(text, this.clipboard_label);
-        showToastAndLog(this.mContext, this.mContext.getString(R.string.toast_clipboard_copy_success));
+        showToastAndLog(this.mContext, toast_text_success);
         mTimer.schedule(clearClipboardRun(text), DEFAULT_TIMEOUT);
     }
 
@@ -57,6 +56,6 @@ public class ClipboardHelper {
             getClipboardFromContext().setPrimaryClip(ClipData.newPlainText(clipboard_label, ""));
         }
         showToastAndLog(this.mContext.getApplicationContext(), "Clipboard cleared");
-    };
+    }
 
 }

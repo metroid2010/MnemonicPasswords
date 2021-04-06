@@ -5,8 +5,8 @@ import java.util.Vector;
 
 public class PasswordGenerator {
 
-    private int password_length;
-    private WordDictionary word_dictionary;
+    private final int password_length;
+    private final WordDictionary word_dictionary;
 
     public PasswordGenerator(WordDictionary word_dictionary, int password_length) {
         this.password_length = password_length;

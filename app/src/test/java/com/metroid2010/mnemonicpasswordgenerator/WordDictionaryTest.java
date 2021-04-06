@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 import static org.junit.Assert.*;
 
