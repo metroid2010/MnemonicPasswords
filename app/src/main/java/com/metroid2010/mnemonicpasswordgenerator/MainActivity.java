@@ -1,14 +1,18 @@
 package com.metroid2010.mnemonicpasswordgenerator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textview_password;
     private Password password;
     private ClipboardManager clipboard;
+    private static final String TAG = BuildConfig.APPLICATION_ID;
 
     public MainActivity() {
     }
@@ -65,12 +70,33 @@ public class MainActivity extends AppCompatActivity {
             ClipData clip = ClipData.newPlainText("MnemonicPasswordGenerator password", this.password.toString());
             showToast(getString(R.string.toast_clipboard_copy_success));
             this.clipboard.setPrimaryClip(clip);
+            this.clearClipboardTimeout(this.clipboard, 30000);
         } catch (NullPointerException e) {
             showToast(getString(R.string.toast_error_copy_to_clipboard_empty_password));
         }
     }
 
+    private void clearClipboardTimeout(ClipboardManager clipboard, long delay_ms) {
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        Runnable run = () -> {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                clipboard.clearPrimaryClip();
+            } else {
+                clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
+            }
+            showToast("Clipboard cleared");
+        };
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            String token = "MnemonicPasswordGeneratorCBService";
+            mHandler.removeCallbacksAndMessages(token);
+            mHandler.postDelayed(run, token, delay_ms);
+        } else {
+            mHandler.postDelayed(run, delay_ms);
+        }
+    }
+
     private void showToast(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, text);
     }
 }
