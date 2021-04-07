@@ -1,4 +1,4 @@
-package com.metroid2010.mnemonicpasswordgenerator;
+package com.metroid2010.mnemonicpasswords;
 
 import java.io.InputStream;
 

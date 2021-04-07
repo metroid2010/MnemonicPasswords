@@ -1,4 +1,4 @@
-package com.metroid2010.mnemonicpasswordgenerator;
+package com.metroid2010.mnemonicpasswords;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
-import static com.metroid2010.mnemonicpasswordgenerator.Utils.showToastAndLog;
+import static com.metroid2010.mnemonicpasswords.Utils.showToastAndLog;
 
 public class MainActivity extends AppCompatActivity {
 

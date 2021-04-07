@@ -11,13 +11,13 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.metroid2010.mnemonicpasswordgenerator"
+        applicationId "com.metroid2010.mnemonicpasswords"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "0.0.1a"
         multiDexEnabled true
-        archivesBaseName = "MnemonicPasswordGenerator"
+        archivesBaseName = "MnemonicPasswords"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

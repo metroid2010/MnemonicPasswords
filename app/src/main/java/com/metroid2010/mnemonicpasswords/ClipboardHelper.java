@@ -1,4 +1,4 @@
-package com.metroid2010.mnemonicpasswordgenerator;
+package com.metroid2010.mnemonicpasswords;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -8,13 +8,13 @@ import android.os.Build;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.metroid2010.mnemonicpasswordgenerator.Utils.showToastAndLog;
+import static com.metroid2010.mnemonicpasswords.Utils.showToastAndLog;
 
 public class ClipboardHelper {
 
     private final Timer mTimer;
     private final Context mContext;
-    private final String clipboard_label = "MnemonicPasswordGenerator password";
+    private final String clipboard_label = "MnemonicPasswords password";
     private final long DEFAULT_TIMEOUT = (BuildConfig.DEBUG ? (5 * 1000) : (30 * 1000));
 
 
