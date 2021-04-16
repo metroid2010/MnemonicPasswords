@@ -12,7 +12,6 @@ import static com.metroid2010.mnemonicpasswords.Utils.showToastAndLog;
 
 public class MainActivity extends AppCompatActivity {
 
-    @SuppressWarnings("FieldCanBeLocal")
     private final int PASSWORD_LENGTH = 4;
     private final String dictionaries_assets_path = "dictionaries";
     private String[] dictionaries;

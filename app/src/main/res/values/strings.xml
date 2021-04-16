@@ -3,7 +3,7 @@
     <string name="button_generate_password">Generate Password</string>
     <string name="textview_password_box_placeholder">Press Generate Password</string>
     <string name="toast_error_reading_dictionaries_dictionary">Error reading dictionaries directory</string>
-    <string name="toast_error_opening_dictionary">\"Error opening dictionary \"</string>
+    <string name="toast_error_opening_dictionary">Error opening dictionary</string>
     <string name="textview_error_generating_password">Error generating password</string>
     <string name="toast_error_generate_password_dict_not_initialized">Cannot generate password: dictionary not initialized</string>
     <string name="button_copy_to_clipboard">Copy to clipboard</string>

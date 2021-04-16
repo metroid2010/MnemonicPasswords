@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textview_password_box_placeholder"
-        android:textSize="24sp"
+        android:textSize="@dimen/password_text_size"
         android:freezesText="true"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,19 +22,33 @@
 
     <Button
         android:id="@+id/button_generate_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:textSize="@dimen/button_main_text_size"
         android:text="@string/button_generate_password"
         android:onClick="ocButtonGeneratePassword"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline1"
+        android:theme="@style/Theme.MnemonicPasswords.ButtonMain"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/button_copy_to_clipboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:textSize="@dimen/button_main_text_size"
         android:onClick="ocButtonCopyToClipboard"
         android:text="@string/button_copy_to_clipboard"
-        app:layout_constraintBottom_toTopOf="@+id/button_generate_password" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
