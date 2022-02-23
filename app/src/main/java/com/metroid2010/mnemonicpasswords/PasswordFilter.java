@@ -2,8 +2,8 @@ package com.metroid2010.mnemonicpasswords;
 
 public class PasswordFilter {
 
-    private String regex_per_word;
-    private String regex_whole;
+    private final String regex_per_word;
+    private final String regex_whole;
 
     public PasswordFilter(final String regex_per_word, final String regex_whole) {
         this.regex_per_word = regex_per_word;

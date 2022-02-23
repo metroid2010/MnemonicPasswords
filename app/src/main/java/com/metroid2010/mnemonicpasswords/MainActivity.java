@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
     private final String dictionaries_assets_path = "dictionaries";
     private String[] dictionaries;
     private PasswordGenerator pwg;
-    private PasswordFilter filter_proper_name = new PasswordFilter("[a-z']", "");
-    private PasswordFilter filter_apostrophe = new PasswordFilter("[a-zA-Z]", "");
     private TextView textview_password;
     private Password password;
     private ClipboardHelper mClipboardHelper;
+
+    // Default filters
+    private final PasswordFilter filter_proper_name = new PasswordFilter("([a-z'])+", "");
+    private final PasswordFilter filter_apostrophe = new PasswordFilter("([a-zA-Z])+", "");
 
     public MainActivity() {
     }
@@ -31,12 +33,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.dictionaries = readDictionariesInAssets(this.dictionaries_assets_path);
         this.pwg = new PasswordGenerator(getDictionaryFromAsset(this.dictionaries[0]), this.DEFAULT_PASSWORD_LENGTH);
+        this.pwg.add_filter(filter_apostrophe);
+        this.pwg.add_filter(filter_proper_name);
         this.textview_password = findViewById(R.id.textview_password_box);
         this.mClipboardHelper = new ClipboardHelper(getApplicationContext());
     }
 
     public void ocButtonGeneratePassword(View view) {
         this.textview_password.setText(generatePassword());
+    }
+
+    public void ocButtonCopyToClipboard(View view) {
+        if (this.password != null) {
+            mClipboardHelper.copyToClipboardWithTimeout(this.password.toString(), getString(R.string.toast_clipboard_copy_success), getString(R.string.toast_error_copy_to_clipboard_empty_password));
+        } else {
+            showToastAndLog(getApplicationContext(), getString(R.string.toast_no_password));
+        }
     }
 
     private String generatePassword() {
@@ -46,14 +58,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             showToastAndLog(getApplicationContext(), getString(R.string.toast_error_generate_password_dict_not_initialized));
             return getString(R.string.textview_error_generating_password);
-        }
-    }
-
-    public void ocButtonCopyToClipboard(View view) {
-        if (this.password != null) {
-            mClipboardHelper.copyToClipboardWithTimeout(this.password.toString(), getString(R.string.toast_clipboard_copy_success), getString(R.string.toast_error_copy_to_clipboard_empty_password));
-        } else {
-            showToastAndLog(getApplicationContext(), getString(R.string.toast_no_password));
         }
     }
 

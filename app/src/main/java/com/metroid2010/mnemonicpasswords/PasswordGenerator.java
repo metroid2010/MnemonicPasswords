@@ -8,7 +8,7 @@ public class PasswordGenerator {
     private final int password_length;
     private final WordDictionary word_dictionary;
     private final int MAX_TRIES_PASSWORD_GEN = 100;
-    private Vector<PasswordFilter> filters;
+    private final Vector<PasswordFilter> filters;
 
     public PasswordGenerator(WordDictionary word_dictionary, int password_length) {
         this.password_length = password_length;
