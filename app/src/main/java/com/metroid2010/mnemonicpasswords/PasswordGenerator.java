@@ -29,6 +29,10 @@ public class PasswordGenerator {
         this.filters.add(password_filter);
     }
 
+    public void remove_filter(final PasswordFilter password_filter) {
+        this.filters.remove(password_filter);
+    }
+
     private int generate_random_number(int max) {
         SecureRandom rng = new SecureRandom();
         return rng.nextInt(max);

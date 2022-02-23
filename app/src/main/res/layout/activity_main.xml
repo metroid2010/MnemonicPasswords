@@ -34,14 +34,14 @@
 
     <Button
         android:id="@+id/button_copy_to_clipboard"
-        android:layout_height="100dp"
         android:layout_width="0dp"
-        android:textSize="@dimen/button_main_text_size"
+        android:layout_height="100dp"
         android:onClick="ocButtonCopyToClipboard"
         android:text="@string/button_copy_to_clipboard"
+        android:textSize="@dimen/button_main_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/guideline1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -50,5 +50,30 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <CheckBox
+        android:id="@+id/checkbox_filter_apostrophes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:checked="true"
+        android:onClick="ocCheckboxFilterApostrophes"
+        android:minHeight="48dp"
+        android:text="@string/checkbox_filter_apostrophes"
+        app:layout_constraintBottom_toTopOf="@id/button_copy_to_clipboard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline1" />
+
+    <CheckBox
+        android:id="@+id/checkbox_filter_proper_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:checked="true"
+        android:onClick="ocCheckboxFilterProperNames"
+        android:minHeight="48dp"
+        android:text="@string/checkbox_filter_proper_names"
+        app:layout_constraintBottom_toTopOf="@id/button_generate_password"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline1"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

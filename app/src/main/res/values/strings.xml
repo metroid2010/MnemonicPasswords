@@ -9,4 +9,6 @@
     <string name="button_copy_to_clipboard">Copy to clipboard</string>
     <string name="toast_clipboard_copy_success">Password copied to clipboard</string>
     <string name="toast_no_password">No password to copy</string>
+    <string name="checkbox_filter_apostrophes">Filter apostrophes</string>
+    <string name="checkbox_filter_proper_names">Filter proper names</string>
 </resources>

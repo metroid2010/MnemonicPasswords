@@ -2,6 +2,7 @@ package com.metroid2010.mnemonicpasswords;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,4 +85,21 @@ public class MainActivity extends AppCompatActivity {
         return word_dictionary;
     }
 
+    public void ocCheckboxFilterApostrophes(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            this.pwg.add_filter(filter_apostrophe);
+        } else {
+            this.pwg.remove_filter(filter_apostrophe);
+        }
+    }
+
+    public void ocCheckboxFilterProperNames(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        if(checked) {
+            this.pwg.add_filter(filter_proper_name);
+        } else {
+            this.pwg.remove_filter(filter_proper_name);
+        }
+    }
 }
