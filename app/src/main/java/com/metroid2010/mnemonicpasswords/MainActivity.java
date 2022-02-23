@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ocButtonCopyToClipboard(View view) {
         if (this.password != null) {
-            mClipboardHelper.copyToClipboardWithTimeout(this.password.toString(), getString(R.string.toast_clipboard_copy_success), getString(R.string.toast_error_copy_to_clipboard_empty_password));
+            mClipboardHelper.copyToClipboardWithTimeout(this.password.toString(), getString(R.string.toast_clipboard_copy_success));
         } else {
             showToastAndLog(getApplicationContext(), getString(R.string.toast_no_password));
         }

@@ -23,7 +23,7 @@ public class ClipboardHelper {
         mTimer = new Timer();
     }
 
-    public void copyToClipboardWithTimeout(String text, String toast_text_success, String toast_text_error) {
+    public void copyToClipboardWithTimeout(String text, String toast_text_success) {
         copyToClipboard(text, this.clipboard_label);
         showToastAndLog(this.mContext, toast_text_success);
         mTimer.schedule(clearClipboardRun(text), DEFAULT_TIMEOUT);

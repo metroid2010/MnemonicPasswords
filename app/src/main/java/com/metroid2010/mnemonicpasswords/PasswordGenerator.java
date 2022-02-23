@@ -7,7 +7,6 @@ public class PasswordGenerator {
 
     private final int password_length;
     private final WordDictionary word_dictionary;
-    private final int MAX_TRIES_PASSWORD_GEN = 100;
     private final Vector<PasswordFilter> filters;
 
     public PasswordGenerator(WordDictionary word_dictionary, int password_length) {
@@ -24,10 +23,6 @@ public class PasswordGenerator {
             p = new Password(this.build_random_word_vector(this.password_length, this.word_dictionary));
         } while (!this.pass_filters(p));
         return p;
-    }
-
-    public String get_dictionary_name() {
-        return this.word_dictionary.get_dictionary_name();
     }
 
     public void add_filter(final PasswordFilter password_filter) {

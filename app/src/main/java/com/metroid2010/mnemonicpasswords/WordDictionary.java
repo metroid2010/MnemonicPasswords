@@ -16,8 +16,6 @@ public class WordDictionary {
         this.dictionary_name = dictionary_name;
     }
 
-    public String get_dictionary_name() { return this.dictionary_name; }
-
     private Vector<String> load_from_is(InputStream is) throws IOException {
         Vector<String> contents = new Vector<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
