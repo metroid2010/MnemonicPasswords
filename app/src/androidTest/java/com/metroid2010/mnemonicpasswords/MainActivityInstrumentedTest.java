@@ -11,6 +11,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +67,7 @@ public class MainActivityInstrumentedTest {
         onView(withId(R.id.button_copy_to_clipboard)).perform(click());
         final String[] clipboardContent = new String[1];
         getClipboardContent(clipboardContent);
-        assertThat(clipboardContent[0], is(""));
+        MatcherAssert.assertThat(clipboardContent[0], is(""));
     }
 
     @Test
@@ -78,11 +79,14 @@ public class MainActivityInstrumentedTest {
         getClipboardContent(clipboardContent);
         onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
 
-        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT + 2 * 1000));
-
+        final long timeout_delta = DEFAULT_TIMEOUT / 10;
+        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
         getClipboardContent(clipboardContent);
+        MatcherAssert.assertThat(clipboardContent[0], is(not("")));
 
-        assertThat(clipboardContent[0], is(""));
+        onView(isRoot()).perform(waitFor(timeout_delta));
+        getClipboardContent(clipboardContent);
+        MatcherAssert.assertThat(clipboardContent[0], is(""));
     }
 
     private static ViewAction waitFor(final long millis) {
@@ -108,7 +112,11 @@ public class MainActivityInstrumentedTest {
         getInstrumentation().runOnMainSync(() -> {
             final Context context = getApplicationContext();
             final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboardContent[0] = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
+            if(clipboard.getPrimaryClip() != null) {
+                clipboardContent[0] = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
+            } else {
+                clipboardContent[0] = "";
+            }
         });
     }
 }

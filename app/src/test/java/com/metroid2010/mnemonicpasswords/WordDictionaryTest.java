@@ -32,7 +32,7 @@ public class WordDictionaryTest {
 
     @Test
     public void WordDictionary_WhenGetDictionaryLength_ReturnCorrectLength() {
-        assertEquals(this.wd.get_length(), 200);
+        assertEquals(this.wd.get_length(), 260);
     }
 
 }
