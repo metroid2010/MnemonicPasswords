@@ -55,48 +55,6 @@ public class MainActivityInstrumentedTest {
     }
 
     @Test
-    public void copyToClipboardWithGeneratedPasswordTest() {
-        onView(withId(R.id.button_generate_password)).perform(click());
-        onView(withId(R.id.button_copy_to_clipboard)).perform(click());
-
-        final String[] clipboardContent = new String[1];
-        getClipboardContent(clipboardContent);
-        onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
-    }
-
-    @Test
-    public void copyToClipboardWithEmptyPasswordTest() {
-        getInstrumentation().runOnMainSync(() -> {
-            final Context context = getApplicationContext();
-            final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
-        });
-        onView(withId(R.id.button_copy_to_clipboard)).perform(click());
-        final String[] clipboardContent = new String[1];
-        getClipboardContent(clipboardContent);
-        MatcherAssert.assertThat(clipboardContent[0], is(""));
-    }
-
-    @Test
-    public void copyToClipboardTimeoutTest() {
-        onView(withId(R.id.button_generate_password)).perform(click());
-        onView(withId(R.id.button_copy_to_clipboard)).perform(click());
-
-        final String[] clipboardContent = new String[1];
-        getClipboardContent(clipboardContent);
-        onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
-
-        final long timeout_delta = DEFAULT_TIMEOUT / 10;
-        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
-        getClipboardContent(clipboardContent);
-        MatcherAssert.assertThat(clipboardContent[0], is(not("")));
-
-        onView(isRoot()).perform(waitFor(timeout_delta));
-        getClipboardContent(clipboardContent);
-        MatcherAssert.assertThat(clipboardContent[0], is(""));
-    }
-
-    @Test
     public void filterCheckboxTest() {
         final String regex_filter_no_apostrophes = "([a-zA-Z\\s])+";
         final String regex_filter_no_proper_names = "([a-z'\\s])+";
@@ -181,6 +139,7 @@ public class MainActivityInstrumentedTest {
             this.max_tries = max_tries;
         }
     }
+
     private static Matcher<View> withCharacterAfterSomeTries(final String character, MatcherTriesData mtd) {
         return new BoundedMatcher<View, TextView>(TextView.class) {
             @Override
@@ -222,34 +181,4 @@ public class MainActivityInstrumentedTest {
         };
     }
 
-    private static ViewAction waitFor(final long millis) {
-        return new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return isRoot();
-            }
-
-            @Override
-            public String getDescription() {
-                return "Wait for " + millis + " milliseconds.";
-            }
-
-            @Override
-            public void perform(UiController uiController, final View view) {
-                uiController.loopMainThreadForAtLeast(millis);
-            }
-        };
-    }
-
-    private void getClipboardContent(String[] clipboardContent) {
-        getInstrumentation().runOnMainSync(() -> {
-            final Context context = getApplicationContext();
-            final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            if(clipboard.getPrimaryClip() != null) {
-                clipboardContent[0] = clipboard.getPrimaryClip().getItemAt(0).getText().toString();
-            } else {
-                clipboardContent[0] = "";
-            }
-        });
-    }
 }
