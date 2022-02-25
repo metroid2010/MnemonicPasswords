@@ -38,8 +38,6 @@ import java.util.Locale;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityInstrumentedTest {
 
-    private final long DEFAULT_TIMEOUT = (BuildConfig.DEBUG ? (5 * 1000) : (30 * 1000));
-
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 

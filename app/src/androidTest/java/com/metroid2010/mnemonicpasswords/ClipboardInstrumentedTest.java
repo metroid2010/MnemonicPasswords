@@ -46,11 +46,6 @@ public class ClipboardInstrumentedTest {
 
     @Test
     public void copyToClipboardWithEmptyPasswordTest() {
-        getInstrumentation().runOnMainSync(() -> {
-            final Context context = getApplicationContext();
-            final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboard.setPrimaryClip(ClipData.newPlainText("", ""));
-        });
         onView(withId(R.id.button_copy_to_clipboard)).perform(click());
         final String[] clipboardContent = new String[1];
         getClipboardContent(clipboardContent);
@@ -82,16 +77,20 @@ public class ClipboardInstrumentedTest {
         final long timeout_delta = DEFAULT_TIMEOUT / 2;
 
         // generate a password and copy to clipboard
-        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
         onView(withId(R.id.button_generate_password)).perform(click());
         onView(withId(R.id.button_copy_to_clipboard)).perform(click());
-        getClipboardContent(clipboardContent);
-        onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
-        onView(isRoot()).perform(waitFor(timeout_delta));
+        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
+
+        // generate another password and copy to clipboard
+        onView(withId(R.id.button_generate_password)).perform(click());
+        onView(withId(R.id.button_copy_to_clipboard)).perform(click());
+        onView(isRoot()).perform(waitFor(timeout_delta + 100));
+
         // DEFAULT_TIMEOUT has passed since first password, check the first clear instruction was
         //  not executed and erased the second, not intended for it, password
         getClipboardContent(clipboardContent);
         onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
+
         // verify that second password clears after intended time
         onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
         getClipboardContent(clipboardContent);
@@ -109,14 +108,20 @@ public class ClipboardInstrumentedTest {
         onView(withId(R.id.button_copy_to_clipboard)).perform(click());
         getClipboardContent(clipboardContent);
         onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
-        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta));
-        onView(withId(R.id.button_copy_to_clipboard)).perform(click());
-        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT));
+        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta)); // t: DEF - t_d
+
+        // second press of copy to clipboard
+        onView(withId(R.id.button_copy_to_clipboard)).perform(click()); // on t: DEF - t_d, will finish on t+DEF
+        onView(isRoot()).perform(waitFor(timeout_delta + 100)); // t: DEF + 100
 
         // DEFAULT_TIMEOUT seconds have passed since the first copy instruction,
         // check password was not cleared, respecting the second copy instruction
         getClipboardContent(clipboardContent);
         onView(withId(R.id.textview_password_box)).check(matches(withText(clipboardContent[0])));
+
+        onView(isRoot()).perform(waitFor(DEFAULT_TIMEOUT - timeout_delta)); // t: DEF + DEF - t_d
+        getClipboardContent(clipboardContent);
+        MatcherAssert.assertThat(clipboardContent[0], is(""));
     }
 
     private static ViewAction waitFor(final long millis) {
