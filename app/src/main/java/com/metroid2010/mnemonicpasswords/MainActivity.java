@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ClipboardHelper mClipboardHelper;
 
     // Default filters
-    private final PasswordFilter filter_proper_name = new PasswordFilter("([a-z'])+", "");
+    private final PasswordFilter filter_proper_noun = new PasswordFilter("([a-z'])+", "");
     private final PasswordFilter filter_apostrophe = new PasswordFilter("([a-zA-Z])+", "");
 
     public MainActivity() {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         this.dictionaries = readDictionariesInAssets(this.dictionaries_assets_path);
         this.pwg = new PasswordGenerator(getDictionaryFromAsset(this.dictionaries[0]), this.DEFAULT_PASSWORD_LENGTH);
         this.pwg.add_filter(filter_apostrophe);
-        this.pwg.add_filter(filter_proper_name);
+        this.pwg.add_filter(filter_proper_noun);
         this.textview_password = findViewById(R.id.textview_password_box);
         this.mClipboardHelper = new ClipboardHelper(getApplicationContext());
     }
@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void ocCheckboxFilterProperNames(View view) {
+    public void ocCheckboxFilterProperNouns(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         if(checked) {
-            this.pwg.add_filter(filter_proper_name);
+            this.pwg.add_filter(filter_proper_noun);
         } else {
-            this.pwg.remove_filter(filter_proper_name);
+            this.pwg.remove_filter(filter_proper_noun);
         }
     }
 }

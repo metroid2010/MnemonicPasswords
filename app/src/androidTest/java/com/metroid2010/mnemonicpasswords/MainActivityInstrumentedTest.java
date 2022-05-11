@@ -55,20 +55,20 @@ public class MainActivityInstrumentedTest {
     @Test
     public void filterCheckboxTest() {
         final String regex_filter_no_apostrophes = "([a-zA-Z\\s])+";
-        final String regex_filter_no_proper_names = "([a-z'\\s])+";
+        final String regex_filter_no_proper_nouns = "([a-z'\\s])+";
         final String regex_filter_apostrophes = "([a-z'A-Z\\s])+";
-        final String regex_filter_proper_names = "([a-zA-Z'\\s])+";
+        final String regex_filter_proper_nouns = "([a-zA-Z'\\s])+";
         final int MAX_TRIES = 20;
 
         // verify default state of checkbox: checked
         onView(withId(R.id.checkbox_filter_apostrophes)).check(matches(isChecked()));
-        onView(withId(R.id.checkbox_filter_proper_names)).check(matches(isChecked()));
+        onView(withId(R.id.checkbox_filter_proper_nouns)).check(matches(isChecked()));
 
         // generate passwords with filters on, check filters work
         for (int i = 0; i < MAX_TRIES; i++) { // try several times to ensure some have apostrophe
             onView(withId(R.id.button_generate_password)).perform(click());
             onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_apostrophes)));
-            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_names)));
+            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_nouns)));
         }
 
         // uncheck filter apostrophes, check filter was deactivated
@@ -78,19 +78,19 @@ public class MainActivityInstrumentedTest {
             onView(withId(R.id.button_generate_password)).perform(click());
             // there should be apostrophes in some password generated now
             onView(withId(R.id.textview_password_box)).check(matches(withCharacterAfterSomeTries("'", mtd1)));
-            // there should not be proper names (heuristic is uppercase characters in word)
-            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_names)));
+            // there should not be proper nouns (heuristic is uppercase characters in word)
+            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_nouns)));
         }
 
         // uncheck both filters, check both filters were deactivated
-        onView(withId(R.id.checkbox_filter_proper_names)).perform(click());
+        onView(withId(R.id.checkbox_filter_proper_nouns)).perform(click());
         mtd1 = new MatcherTriesData(MAX_TRIES - 1); // reset counter
-        MatcherTriesData mtd2 = new MatcherTriesData(MAX_TRIES - 1); // for proper names
+        MatcherTriesData mtd2 = new MatcherTriesData(MAX_TRIES - 1); // for proper nouns
         for (int i = 0; i < MAX_TRIES; i++) {
             onView(withId(R.id.button_generate_password)).perform(click());
             // there should be apostrophes
             onView(withId(R.id.textview_password_box)).check(matches(withCharacterAfterSomeTries("'", mtd1)));
-            // there should be proper names (uppercase)
+            // there should be proper nouns (uppercase)
             onView(withId(R.id.textview_password_box)).check(matches(withUppercaseAfterSomeTries(mtd2)));
         }
 
@@ -101,18 +101,18 @@ public class MainActivityInstrumentedTest {
             onView(withId(R.id.button_generate_password)).perform(click());
             // there should not be apostrophes
             onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_apostrophes)));
-            // there should be proper names (uppercase)
+            // there should be proper nouns (uppercase)
             onView(withId(R.id.textview_password_box)).check(matches(withUppercaseAfterSomeTries(mtd2)));
         }
 
-        // check filter proper names again, check both filters are active again
-        onView(withId(R.id.checkbox_filter_proper_names)).perform(click());
+        // check filter proper nouns again, check both filters are active again
+        onView(withId(R.id.checkbox_filter_proper_nouns)).perform(click());
         for (int i = 0; i < MAX_TRIES; i++) {
             onView(withId(R.id.button_generate_password)).perform(click());
             // there should not be apostrophes
             onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_apostrophes)));
-            // there should not be proper names (uppercase)
-            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_names)));
+            // there should not be proper nouns (uppercase)
+            onView(withId(R.id.textview_password_box)).check(matches(withPattern(regex_filter_proper_nouns)));
         }
     }
 
