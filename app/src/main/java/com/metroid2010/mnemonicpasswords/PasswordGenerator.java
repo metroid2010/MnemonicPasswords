@@ -2,12 +2,14 @@ package com.metroid2010.mnemonicpasswords;
 
 import java.security.SecureRandom;
 import java.util.Vector;
+import java.util.concurrent.TimeoutException;
 
 public class PasswordGenerator {
 
     private final int password_length;
     private final WordDictionary word_dictionary;
     private final Vector<PasswordFilter> filters;
+    private final int GENERATE_MAX_TRIES = 1000;
 
     public PasswordGenerator(WordDictionary word_dictionary, int password_length) {
         this.password_length = password_length;
@@ -15,12 +17,15 @@ public class PasswordGenerator {
         this.filters = new Vector<>();
     }
 
-    public Password generate_password(){
-        //TODO: avoid infinite loop, throw exception after some tries, manage exception somewhere
-        // so that it creates some kind of feedback for user
+    public Password generate_password() throws TimeoutException {
         Password p;
+        int i = 0;
         do {
             p = new Password(this.build_random_word_vector(this.password_length, this.word_dictionary));
+            if (i > GENERATE_MAX_TRIES) {
+                throw new TimeoutException();
+            }
+            i++;
         } while (!this.pass_filters(p));
         return p;
     }

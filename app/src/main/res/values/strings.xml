@@ -11,4 +11,5 @@
     <string name="toast_no_password">No password to copy</string>
     <string name="checkbox_filter_apostrophes">Filter apostrophes</string>
     <string name="checkbox_filter_proper_nouns">Filter proper nouns</string>
+    <string name="toast_error_generate_password_timeout">Cannot generate password: too many tries trying to construct</string>
 </resources>

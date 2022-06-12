@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.TimeoutException;
 
 public class PasswordFilterTest {
 
@@ -19,7 +20,7 @@ public class PasswordFilterTest {
     }
 
     @Test
-    public void PasswordFilter_WhenGeneratePasswordWithNoApostropheFilterPerWord_ReturnValidPassword() {
+    public void PasswordFilter_WhenGeneratePasswordWithNoApostropheFilterPerWord_ReturnValidPassword() throws TimeoutException {
         PasswordGenerator pwg = new PasswordGenerator(this.wd, 1);
         PasswordFilter filter = new PasswordFilter("([a-zA-Z0-9])+", "");
         pwg.add_filter(filter);
@@ -30,7 +31,7 @@ public class PasswordFilterTest {
     }
 
     @Test
-    public void PasswordFilter_WhenGeneratePasswordWithNoNumbersFilterWhole_ReturnValidPassword() {
+    public void PasswordFilter_WhenGeneratePasswordWithNoNumbersFilterWhole_ReturnValidPassword() throws TimeoutException {
         PasswordGenerator pwg = new PasswordGenerator(this.wd, 1);
         PasswordFilter filter = new PasswordFilter("([a-z'A-Z])+", "");
         pwg.add_filter(filter);

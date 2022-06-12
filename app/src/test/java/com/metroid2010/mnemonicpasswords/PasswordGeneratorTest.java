@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.TimeoutException;
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -19,7 +21,7 @@ public class PasswordGeneratorTest {
     }
 
     @Test
-    public void PasswordGenerator_WhenGeneratePasswordOfFourWords_ReturnStringFourRandomWords() {
+    public void PasswordGenerator_WhenGeneratePasswordOfFourWords_ReturnStringFourRandomWords() throws TimeoutException {
         PasswordGenerator pwg = new PasswordGenerator(this.wd, 4);
         String pwd_regex = "([a-zA-Z'0-9]+[\\s]){3}([a-zA-Z'0-9]+)";
         assertTrue(pwg.generate_password().toString().matches(pwd_regex));

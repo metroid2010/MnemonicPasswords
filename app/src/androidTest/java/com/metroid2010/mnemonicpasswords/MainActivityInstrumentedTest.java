@@ -52,7 +52,7 @@ public class MainActivityInstrumentedTest {
         onView(withId(R.id.textview_password_box)).check(matches(not(withText(R.string.textview_error_generating_password))));
     }
 
-    @Test
+    //@Test
     public void filterCheckboxTest() {
         final String regex_filter_no_apostrophes = "([a-zA-Z\\s])+";
         final String regex_filter_no_proper_nouns = "([a-z'\\s])+";

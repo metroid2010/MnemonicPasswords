@@ -43,6 +43,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline1" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_copy_to_clipboard"
+        android:src="@drawable/ic_baseline_content_paste_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:contentDescription="@string/button_copy_to_clipboard" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
@@ -54,26 +66,28 @@
         android:id="@+id/checkbox_filter_apostrophes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:checked="true"
-        android:onClick="ocCheckboxFilterApostrophes"
         android:minHeight="48dp"
+        android:onClick="ocCheckboxFilterApostrophes"
         android:text="@string/checkbox_filter_apostrophes"
+        android:textColor="#00796B"
         app:layout_constraintBottom_toTopOf="@id/button_copy_to_clipboard"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:visibility="gone"
         app:layout_constraintRight_toLeftOf="@+id/guideline1" />
 
     <CheckBox
         android:id="@+id/checkbox_filter_proper_nouns"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:checked="true"
-        android:onClick="ocCheckboxFilterProperNouns"
         android:minHeight="48dp"
+        android:onClick="ocCheckboxFilterProperNouns"
         android:text="@string/checkbox_filter_proper_nouns"
+        android:textColor="#00796B"
         app:layout_constraintBottom_toTopOf="@id/button_generate_password"
         app:layout_constraintLeft_toLeftOf="@+id/guideline1"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import static com.metroid2010.mnemonicpasswords.Utils.showToastAndLog;
 
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
             return this.password.toString();
         } catch (NullPointerException e) {
             showToastAndLog(getApplicationContext(), getString(R.string.toast_error_generate_password_dict_not_initialized));
+            return getString(R.string.textview_error_generating_password);
+        } catch (TimeoutException e) {
+            showToastAndLog(getApplicationContext(), getString(R.string.toast_error_generate_password_timeout));
             return getString(R.string.textview_error_generating_password);
         }
     }
